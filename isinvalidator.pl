@@ -44,6 +44,14 @@ sub processInput( )
 {	 #Note this step of getting the first parameter correctly in an array
 	 my @processcode= @{$_[0]};
 	 print "The code entered iss @processcode \n";	
+	 if (@processcode =~ /U/)
+	 {
+		print "It matches";	
+	 }
+	 else
+	 {
+		print "It does not match"; 
+	  }	
 	 
 } 
 

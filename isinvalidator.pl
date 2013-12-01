@@ -27,18 +27,30 @@ sub welcomeMessage()
  
 sub validateInput()
 {	
-	  print "Enter the code you want to validate\n";
-	  my $usercode = <STDIN>;
-	  chomp $usercode;
-	  print "The code entered is $usercode\n";
-	  
+	 print "Enter the code you want to validate\n";
+         # Used a scalar instead of array as the perl executor hangs even if user has finished entering his input
+	 my $usercode = <STDIN>;
+	 chomp $usercode;
+	 my @arrusercode;
+	 # This pushes the usercode to arrusercode which is an array
+	 push @arrusercode, $usercode;
+	 print "The code entered is @arrusercode\n";
+	 #Passing the array to process
+	 processInput(\@arrusercode);
 		
 }
 
-sub processInput( &)
-{
-	
+sub processInput( )
+{	 #Note this step of getting the first parameter correctly in an array
+	 my @processcode= @{$_[0]};
+	 print "The code entered iss @processcode \n";	
+	 
 } 
 
+sub isValid()
+{	
+	my $codecheck= @{$_[0]};
+	print "The code is $codecheck"
+}
 welcomeMessage();
-processInput();
+

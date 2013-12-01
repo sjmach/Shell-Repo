@@ -31,44 +31,28 @@ sub validateInput()
          # Used a scalar instead of array as the perl executor hangs even if user has finished entering his input
 	 my $usercode = <STDIN>;
 	 chomp $usercode;
-	# my @arrusercode;
+	 my @arrusercode;
 	 # This pushes the usercode to arrusercode which is an array
-	 #push @arrusercode, $usercode;
-	
-	 print "The code entered is $usercode\n";
+	 push @arrusercode, $usercode;
+	 print "The code entered is @arrusercode\n";
 	 #Passing the array to process
-	 processInput($usercode);
+	 processInput(\@arrusercode);
 		
 }
 
 sub processInput( )
 {	 #Note this step of getting the first parameter correctly in an array
-	 my $processcode= $_[0];
-	 #Validation 1 : The length of ISIN string should be 12
-	 my $codelength = length($processcode);
-	 print " the code length is $codelength";
-	 if($codelength != 12)
+	 my @processcode= @{$_[0]};
+	 print "The code entered iss @processcode \n";	
+	 if (@processcode =~ /U/)
 	 {
-		print"The ISIN number should have exactly 12 characters";
-	
+		print "It matches";	
 	 }
 	 else
 	 {
-		
-	
-	 print "The code entered iss $processcode \n";	
-	 #Validation 2 : First two characters should be valid country code and remaining 10 characters should be numbers 
-	 if ($processcode =~ /^(BE|BM|FR|BG|VE|DK|HR|DE|JP|HU|HK|JO|BR|XS|FI|GR|IS|RU|LB|PT|NO|TW|UA|TR|LK|LV|LU|TH|NL|PK|PH|RO|EG|PL|AA|CH|CN|CL|EE|CA|IR|IT|ZA|CZ|CY|AR|AU|AT|IN|CS|CR|IE|ID|ES|PE|TN|PA|SG|IL|US|MX|SK|KR|SI|KW|MY|MO|SE|GB|GG|KY|JE|VG|NG|SA|MU)([0-9]{9})([0-9])$/)
-	 {
-		#Validation 3 : The last digit is the checksum digit
-		push @arrusercode, $processcode;
-	 }
-	 else
-	 {
-		print "In an ISIN code, the first two chracters should be valid country code and remaining 9 digits should be numbers"; 
-	  }
+		print "It does not match"; 
+	  }	
 	 
-	  }
 } 
 
 sub isValid()
@@ -77,5 +61,4 @@ sub isValid()
 	print "The code is $codecheck"
 }
 welcomeMessage();
-
 
